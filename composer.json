@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A ZF2 module for integrating with intercom.io",
     "keywords": ["zf2", "intercom"],
-    "license": "MIT"
+    "license": "MIT",
     "authors": [
         {
             "name": "Brian Gallagher",
