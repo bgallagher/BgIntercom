@@ -1,0 +1,25 @@
+{
+    "name": "bgallagher/bgintercom",
+    "type": "library",
+    "description": "A ZF2 module for integrating with intercom.io",
+    "keywords": ["zf2", "intercom"],
+    "license": "MIT"
+    "authors": [
+        {
+            "name": "Brian Gallagher",
+            "email": "gallagher.brian@gmail.com",
+            "homepage": "http://briangallagher.ie"
+        }
+    ],
+    "require": {
+		"zf-commons/zfc-user-doctrine-orm": "0.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "BgIntercom": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}
