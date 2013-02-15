@@ -45,7 +45,7 @@ class Intercom extends AbstractHelper
                 'user_id' => $user->getId(),
                 'email' => $user->getEmail(),
                 'custom_data' => array(
-                    
+
                 ),
             )
         );
