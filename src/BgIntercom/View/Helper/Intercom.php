@@ -42,7 +42,7 @@ class Intercom extends AbstractHelper
         $intercomSettingsJson = json_encode(
             array(
                 'app_id' => $this->getOptions()->getAppId(),
-                'user_id' => $user->getId(),
+                'user_id' => (string) $user->getId(),
                 'name' => $user->getUsername(),
                 'email' => $user->getEmail(),
             )
