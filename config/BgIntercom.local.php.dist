@@ -1,7 +1,8 @@
 <?php
 return array(
     'bgintercom' => array(
-    
+
         //'app_id' => 'YOUR INTERCOM ADD ID HERE',
+
     )
 );

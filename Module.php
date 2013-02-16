@@ -3,8 +3,8 @@
 namespace BgIntercom;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
-use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 
@@ -29,7 +29,6 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
             ),
         );
     }
-
 
     /**
      * Expected to return \Zend\ServiceManager\Config object or array to
@@ -69,4 +68,5 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
             ),
         );
     }
+
 }
