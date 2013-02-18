@@ -8,7 +8,7 @@ use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\View\HelperPluginManager;
 
-class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface, ServiceProviderInterface
+class Module implements AutoloaderProviderInterface, ServiceProviderInterface, ViewHelperProviderInterface
 {
 
     /**
@@ -36,6 +36,25 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
      *
      * @return array|\Zend\ServiceManager\Config
      */
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'BgIntercom\Options\ModuleOptions' => function (ServiceManager $serviceLocator) {
+                    $config = $serviceLocator->get('Config');
+                    return new Options\ModuleOptions(isset($config['bgintercom']) ? $config['bgintercom'] : array());
+
+                }
+            )
+        );
+    }
+
+    /**
+     * Expected to return \Zend\ServiceManager\Config object or array to
+     * seed such an object.
+     *
+     * @return array|\Zend\ServiceManager\Config
+     */
     public function getViewHelperConfig()
     {
         return array(
@@ -47,24 +66,6 @@ class Module implements AutoloaderProviderInterface, ViewHelperProviderInterface
 
                     return $helper;
                 },
-            ),
-        );
-    }
-
-    /**
-     * Expected to return \Zend\ServiceManager\Config object or array to
-     * seed such an object.
-     *
-     * @return array|\Zend\ServiceManager\Config
-     */
-    public function getServiceConfig()
-    {
-        return array(
-            'factories' => array(
-                'BgIntercom\Options\ModuleOptions' => function (ServiceManager $serviceLocator) {
-                    $config = $serviceLocator->get('Config');
-                    return new Options\ModuleOptions(isset($config['bgintercom']) ? $config['bgintercom'] : array());
-                }
             ),
         );
     }
