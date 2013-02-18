@@ -47,7 +47,6 @@ class Intercom extends AbstractHelper
 
         /**
          * If user_hash is present set the user_hash property,
-         * otherwise set the user_id field.
          */
         if ($this->getOptions()->getUserHash()) {
             $intercomSettings['user_hash'] = hash_hmac("sha256", $user->getId(), $this->getOptions()->getUserHash());
@@ -59,7 +58,6 @@ class Intercom extends AbstractHelper
         if (method_exists($user, $this->getOptions()->getCreatedAtGetterMethod())) {
             //Assuming it's a DateTime object...
             $createdAt = $user->{$this->getOptions()->getCreatedAtGetterMethod()}()->getTimestamp();
-
             $intercomSettings['created_at'] = (int)$createdAt;
         } else {
             $intercomSettings['created_at'] = (int)$this->getOptions()->getFallbackCreatedAtTimeStamp();
