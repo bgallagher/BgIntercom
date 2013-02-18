@@ -38,10 +38,19 @@ class Intercom extends AbstractHelper
             return false;
         }
 
+        $createdAt = $this->getOptions()->getFallbackCreatedAtTimeStamp();
+
+        if(method_exists($user, $this->getOptions()->getCreatedAtGetterMethod())){
+            //Assuming it's a DateTime object...
+            $createdAtDateTime = $user->{$this->getOptions()->getCreatedAtGetterMethod()}();
+            $createdAt = $createdAtDateTime->getTimestamp();
+        }
+
         $intercomSettingsJson = json_encode(
             array(
                 'app_id' => $this->getOptions()->getAppId(),
                 'user_id' => (string)$user->getId(),
+                'created_at' => (string)$createdAt,
                 'name' => $user->getUsername(),
                 'email' => $user->getEmail(),
             )

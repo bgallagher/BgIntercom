@@ -4,5 +4,9 @@ return array(
 
         //'app_id' => 'YOUR INTERCOM ADD ID HERE',
 
+        //'fallback_created_at_timeStamp' => '1234567890',
+
+        //'created_at_getter_method' => 'getCreatedAt',
+
     )
 );
