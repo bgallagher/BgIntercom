@@ -40,8 +40,9 @@ class Intercom extends AbstractHelper
 
         $intercomSettings = array(
             'app_id' => $this->getOptions()->getAppId(),
-            'name' => $user->getUsername(),
+            'user_id' => (string)$user->getId(),
             'email' => $user->getEmail(),
+            'name' => $user->getUsername(),
         );
 
         /**
@@ -50,10 +51,8 @@ class Intercom extends AbstractHelper
          */
         if ($this->getOptions()->getUserHash()) {
             $intercomSettings['user_hash'] = hash_hmac("sha256", $user->getId(), $this->getOptions()->getUserHash());
-        } else {
-            $intercomSettings['user_id'] = (string)$user->getId();
         }
-
+        
         /**
          * Assigning the created_at property.
          */
