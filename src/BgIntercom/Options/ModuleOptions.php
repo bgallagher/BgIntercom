@@ -8,7 +8,7 @@ class ModuleOptions extends AbstractOptions
 {
 
     /**
-     * @var String
+     * @var string
      */
     protected $appId;
 
@@ -21,6 +21,11 @@ class ModuleOptions extends AbstractOptions
      * @var string
      */
     protected $createdAtGetterMethod = 'getCreatedAt';
+
+    /**
+     * @var string
+     */
+    protected $userHash;
 
     /**
      * @param String $appId
@@ -68,6 +73,22 @@ class ModuleOptions extends AbstractOptions
     public function getFallbackCreatedAtTimeStamp()
     {
         return $this->fallbackCreatedAtTimeStamp;
+    }
+
+    /**
+     * @param string $userHash
+     */
+    public function setUserHash($userHash)
+    {
+        $this->userHash = $userHash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserHash()
+    {
+        return $this->userHash;
     }
 
 }

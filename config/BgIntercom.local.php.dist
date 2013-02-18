@@ -8,5 +8,7 @@ return array(
 
         //'created_at_getter_method' => 'getCreatedAt',
 
+        //'user_hash' => 'YOUR INTERCOM USER HASH'
+
     )
 );

@@ -38,23 +38,36 @@ class Intercom extends AbstractHelper
             return false;
         }
 
-        $createdAt = $this->getOptions()->getFallbackCreatedAtTimeStamp();
+        $intercomSettings = array(
+            'app_id' => $this->getOptions()->getAppId(),
+            'name' => $user->getUsername(),
+            'email' => $user->getEmail(),
+        );
 
-        if(method_exists($user, $this->getOptions()->getCreatedAtGetterMethod())){
-            //Assuming it's a DateTime object...
-            $createdAtDateTime = $user->{$this->getOptions()->getCreatedAtGetterMethod()}();
-            $createdAt = $createdAtDateTime->getTimestamp();
+        /**
+         * If user_hash is present set the user_hash property,
+         * otherwise set the user_id field.
+         */
+        if ($this->getOptions()->getUserHash()) {
+            $intercomSettings['user_hash'] = hash_hmac("sha256", $user->getId(), $this->getOptions()->getUserHash());
+        } else {
+            $intercomSettings['user_id'] = (string)$user->getId();
         }
 
-        $intercomSettingsJson = json_encode(
-            array(
-                'app_id' => $this->getOptions()->getAppId(),
-                'user_id' => (string)$user->getId(),
-                'created_at' => (int)$createdAt,
-                'name' => $user->getUsername(),
-                'email' => $user->getEmail(),
-            )
-        );
+        /**
+         * Assigning the created_at property.
+         */
+        if (method_exists($user, $this->getOptions()->getCreatedAtGetterMethod())) {
+            //Assuming it's a DateTime object...
+            $createdAt = $user->{$this->getOptions()->getCreatedAtGetterMethod()}()->getTimestamp();
+
+            $intercomSettings['created_at'] = (int)$createdAt;
+        } else {
+            $intercomSettings['created_at'] = (int)$this->getOptions()->getFallbackCreatedAtTimeStamp();
+        }
+
+        $intercomSettingsJson = json_encode($intercomSettings);
+
 
         return <<<EOT
 <script id="IntercomSettingsScriptTag">
